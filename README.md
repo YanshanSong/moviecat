@@ -6,5 +6,21 @@ npm在package json中的script节点中可以定义脚本任务
 
 -- 为NG做一个项目骨架的目的是为了快速开始一个新的项目
 
--- 创建不同的模块，并为这些模块做路由，写控制器
+-- 为不同的视图模板创建独立的模块，并为这些模块做路由，写控制器
+
+-- API:Application Programme Interface(应用程序编程接口)
+
+    有哪些常见的API？
+
+    WebAPI 通过WEB方式提供的接口叫做WEBAPI
+
+    Math.random()  --api?
+
+    所有有输入输出的事物都可以是API,都是函数
+
+-- 测试WebAPI的工具：POSTMAN
+
+
+
+
 

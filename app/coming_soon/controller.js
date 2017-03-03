@@ -9,7 +9,6 @@
 		    controller: 'comingSoonController'
 		  });
 		}])
-
 		.controller('comingSoonController', ['$scope',function($scope) {
 			
 		}]);
