@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JSONP的实现方式</title>
+</head>
+<body>
+	<div id="result"></div>
+
+	 <script src="http.js"></script>
+	 <script>
+	 	(function() {
+	 		$jsonp(
+	 			"http://api.douban.com/v2/movie/in_theaters",
+	 			{
+	 				count:10,
+	 				start:5
+	 			},
+	 			function(data){
+	 				document.getElementById('result').innerHTML = JSON.stringify(data);
+	 			}
+	 			);
+	 	})();
+	 	// $.get('/user/list',{ },function(list)) 仿照jquery的形式
+	 </script>
+</body>
+</html>

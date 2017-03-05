@@ -22,8 +22,10 @@
 		// 最可靠的写法(绝对路径),/表示从根目录开始
 		$scope.subjects = [];
 		$scope.message = '';
+		//开始加载
+		$scope.loading = true;
 		var doubanApiAddress = "http://api.douban.com/v2/movie/in_theaters";
-		//本地ajax请求测试
+		//  本地ajax请求测试
 		// $http.get('data.json').then(function(res) {
 		// 	//此处的代码是在异步请求完成过后才执行(需要等一段时间)
 		// 	console.log(res);
@@ -56,8 +58,14 @@
 		// 	console.log(err);
 		// 	$scope.message = '获取数据错误!错误信息:' + err.statusText;
 		// });
-		//但是豆瓣不支持以上callback=JSON_CALLBACK写法
+		//但是豆瓣不支持JSON_CALLBACK
 		//所以上述代码废
+		 httpService.jsonp(doubanApiAddress,{},function(data) {
+		 	$scope.subjects = data.subjects;
+		 	$scope.loading = false;
+		 	$scope.$apply();
+		 	//$apply的作用:重新同步数据模型
+		});
 	}]);
-})(angular)
+})(angular);
 
