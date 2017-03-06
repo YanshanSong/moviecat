@@ -1,4 +1,4 @@
-<h1 class="page-header">正在热映</h1>
+<h1 class="page-header">{{ title }}</h1>
 <h2 ng-show="message">{{ message }}</h2>
 <div class="list-group">
   <a ng-repeat="item in subjects" href="#" class="list-group-item active">
@@ -33,3 +33,4 @@
 <div class="mask" ng-show="loading">
 	<div class="spinner"></div>
 </div>
+

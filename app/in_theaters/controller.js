@@ -3,7 +3,7 @@
 	angular.module('moviecat.in_theaters', ['ngRoute','moviecat.app.http'])
 	//配置模块的路由
 	.config(['$routeProvider', function($routeProvider) {
-	  $routeProvider.when('/in_theaters', {
+	  $routeProvider.when('/in_theaters/:page?', {
 	    templateUrl: 'in_theaters/view.html',
 	    controller: 'inTheatersController'
 	  });
@@ -11,8 +11,9 @@
 
 	.controller('inTheatersController', [
 		'$scope',
+		'$routeParams',
 		'httpService',
-		function($scope,httpService) {
+		function($scope,$routeParams,httpService) {
 		//控制器 分为两步
 		// 1.设计暴露数据
 		// $scope.subjects = data;
@@ -20,10 +21,17 @@
 		// 2.设计暴露行为	 
 		//测试$http
 		// 最可靠的写法(绝对路径),/表示从根目录开始
+		var count = 10;                   //每一页的条数
+		var page = parseInt($routeParams.page);  //当前页
+		page = page ||　1;
+		var start = (page -1) * count;   //当前页从数据的哪里开始
+
 		$scope.subjects = [];
 		$scope.message = '';
 		//开始加载
 		$scope.loading = true;
+		$scope.totalCount = 0;
+		$scope.totalPages = 0;
 		var doubanApiAddress = "http://api.douban.com/v2/movie/in_theaters";
 		//  本地ajax请求测试
 		// $http.get('data.json').then(function(res) {
@@ -60,8 +68,13 @@
 		// });
 		//但是豆瓣不支持JSON_CALLBACK
 		//所以上述代码废
-		 httpService.jsonp(doubanApiAddress,{},function(data) {
+		 httpService.jsonp(doubanApiAddress,{
+		 	start:start,
+		 	count:count
+		 },function(data) {
 		 	$scope.subjects = data.subjects;
+		 	$scope.totalCount = data.total;
+		 	$scope.totalPages = Math.ceil($scope.totalCount / count);
 		 	$scope.loading = false;
 		 	$scope.$apply();
 		 	//$apply的作用:重新同步数据模型

@@ -20,7 +20,18 @@ npm在package json中的script节点中可以定义脚本任务
 
 -- 测试WebAPI的工具：POSTMAN
 
+分页:
+每页显示多少条 10
 
+page:1 --> start:0  count:10
+page:2 --> start:10 count:10
+page:3 --> start:20 count:10
+
+start = (page-1) * count;
+pageCount = Math.ceil(total / count); 
+
+1.在路由的配置中加上分页的参数
+2.在控制器提取配置参数
 
 
 
