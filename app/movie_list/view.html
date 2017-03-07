@@ -28,7 +28,15 @@
 		</div> 
   </a>
 </div>
-<p>总共: {{ totalCount }}条记录,{{ totalPages }}页</p>
+
+<nav aria-label="..." ng-show="!loading">
+  <ul class="pager">
+    <li ng-class="{disabled:currentPage <= 1}"><a ng-click="go(currentPage - 1)">上一页</a></li>
+    <li ng-class="{disabled:currentPage >= totalPages}"><a ng-click="go(currentPage + 1)">下一页</a></li>
+  </ul>
+</nav>
+
+<p ng-show="!loading">总共: {{ totalCount }}条记录,{{ totalPages }}页信息</p>
 
 <div class="mask" ng-show="loading">
 	<div class="spinner"></div>
