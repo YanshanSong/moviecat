@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>异步加载库</title>
+	<!-- load.js  script.js head.js 都可以帮助我们异步的方式加载-->
+	<script src="bower_components/script.js/dist/script.min.js"></script>
+	<script src="bower_components/angular-loader/angular-loader.min.js"></script>
+</head>
+<body>
+	<script>
+		// $script('you want to load',function(){
+
+		// });
+		// console.log($ + '--=---start....');
+		// $script('bower_components/jquery/dist/jquery.min.js',function(){
+		// 	  // 加载完jquery文件后才执行(需要一定的时间)
+		// 		console.log($ + '--=---in----');
+		// });
+		// console.log($ + '--=---end----');
+
+		$script([
+			'bower_components/jquery/dist/jquery.min.js',
+			'bower_components/angular/angular.min.js',
+			'bower_components/angular-route/angular-route.min.js',
+			'movie_list/controller.js',
+			'components/version/auto-focus.js',
+			'components/version/http.js',
+			'app.js'
+			//由于这个包比较小，加载完成过后就会直接执行，此时angular还没加载完成
+			],function() {
+				console.log(jQuery);
+				console.log(angular);
+				angular.bootstrap(document,['moviecat']);
+		});
+
+		//以上解决方法:①$script一段一段分开写
+
+		//②angular-loader的作用就是在使用一些异步加载脚本库的时候，
+		//angular-loader自动控制依赖顺序
+	</script>
+</body>
+</html>

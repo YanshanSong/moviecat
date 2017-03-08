@@ -16,8 +16,11 @@
 					$scope.$watch('$location.path()',function(now){
 						//当path发生变化时执行
 					var aLink = iElement.children().attr('href').substr(1);
+					//内部存在遍历过程，所有复合条件的iElement依次执行
+					console.log(now.substr(1));
+					console.log(aLink);
+					iElement.removeClass('active');
 					if(now.substr(1).startsWith(aLink)){
-						iElement.parent().children().removeClass('active');
 						iElement.addClass('active');
 					}
 				});		

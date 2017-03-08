@@ -10,7 +10,7 @@
 		var querystring = url.indexOf("?")==-1 ? '?' : '&';
 		for(var key in data){
 			querystring += (key + '=' + data[key] + '&');
-		}
+		} 
 		//querystring = ?id=1&name=zhangsan&
 
 		// 3.处理URL中的回调函数

@@ -26,7 +26,7 @@
 
 			$scope.currentPage = page;
 			$scope.subjects = [];
-			$scope.title = '';
+			$scope.title = 'Loading...';
 			//开始加载
 			$scope.loading = true;
 			$scope.totalCount = 0;
@@ -34,9 +34,15 @@
 			var doubanApiAddress = "http://api.douban.com/v2/movie/" + $routeParams.category;
 			
 			 httpService.jsonp(doubanApiAddress,{
+			 	// routeParams的数据来源:
+			 	// 1.路由匹配出来的
+			 	// 2.?参数中去寻找
 			 	start:start,
-			 	count:count
+			 	count:count,
+			 	q:$routeParams.q
+			 	// q:$routeParams.q
 			 },function(data) {
+			 	// console.log($routeParams.q);
 			 	$scope.title = data.title;
 			 	$scope.subjects = data.subjects;
 			 	$scope.totalCount = data.total;
